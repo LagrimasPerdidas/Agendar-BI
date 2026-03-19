@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registo - Crie a sua conta no Sistema de Agendamento do Bilhete de Identidade.">
+    <title>Registo - SIAC Bilhete de Identidade | Angola</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇦🇴</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-top-left">
+                    <span class="header-top-item">
+                        <i class="fas fa-phone-alt"></i> Linha de Apoio: 111
+                    </span>
+                    <span class="header-top-item">
+                        <i class="fas fa-envelope"></i> suporte@siac.gov.ao
+                    </span>
+                </div>
+                <div class="header-top-right">
+                    <span class="header-top-item">
+                        <i class="fas fa-globe"></i> República de Angola
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">SIAC</span>
+                        <span class="logo-subtitle">Bilhete de Identidade</span>
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="marcacao.html" class="nav-link">Nova Marcação</a>
+                    <a href="minhas-marcacoes.html" class="nav-link">Minhas Marcações</a>
+                    <a href="faq.html" class="nav-link">Ajuda</a>
+                    <a href="login.html" class="nav-link">Entrar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container" style="max-width: 700px; padding: 2rem 1.5rem;">
+            <div class="card" style="animation: fadeInUp 0.6s ease-out;">
+                <div class="card-header" style="text-align: center; flex-direction: column;">
+                    <div style="width: 90px; height: 90px; background: var(--angola-red-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 2.5rem; color: var(--white); box-shadow: 0 8px 25px rgba(206, 17, 38, 0.35);">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 style="margin: 0;">Criar Conta</h3>
+                    <p style="color: var(--gray-500); margin: 0.5rem 0 0;">Registe-se para aceder ao sistema</p>
+                </div>
+                <div class="card-body">
+                    <!-- Stepper -->
+                    <div class="stepper" style="margin-bottom: 2rem;">
+                        <div class="stepper-progress" style="width: 0%;"></div>
+                        <div class="step active" data-step="1">
+                            <div class="step-number"><span>1</span></div>
+                            <span class="step-label">Dados Pessoais</span>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-number"><span>2</span></div>
+                            <span class="step-label">Contacto</span>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number"><span>3</span></div>
+                            <span class="step-label">Segurança</span>
+                        </div>
+                    </div>
+
+                    <form id="registroForm" data-validate>
+                        <!-- Etapa 1: Dados Pessoais -->
+                        <div id="step1" class="form-step">
+                            <div class="form-group">
+                                <label class="form-label required" for="nomeCompleto">Nome Completo</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input 
+                                        type="text" 
+                                        id="nomeCompleto" 
+                                        name="nomeCompleto" 
+                                        class="form-input" 
+                                        placeholder="Digite o seu nome completo"
+                                        data-validate='{"required": true, "minLength": 5}'
+                                        required
+                                    >
+                                </div>
+                                <span class="form-error" style="display: none;"></span>
+                            </div>
+
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label class="form-label required" for="dataNascimento">Data de Nascimento</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-calendar input-icon"></i>
+                                        <input 
+                                            type="date" 
+                                            id="dataNascimento" 
+                                            name="dataNascimento" 
+                                            class="form-input"
+                                            data-validate='{"required": true}'
+                                            required
+                                        >
+                                    </div>
+                                    <span class="form-error" style="display: none;"></span>
+                                    <span class="form-hint"><i class="fas fa-info-circle"></i> Deve ter pelo menos 18 anos</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required" for="genero">Género</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-venus-mars input-icon"></i>
+                                        <select 
+                                            id="genero" 
+                                            name="genero" 
+                                            class="form-select"
+                                            data-validate='{"required": true}'
+                                            required
+                                        >
+                                            <option value="">Selecione</option>
+                                            <option value="masculino">Masculino</option>
+                                            <option value="feminino">Feminino</option>
+                                        </select>
+                                    </div>
+                                    <span class="form-error" style="display: none;"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label required" for="nif">NIF</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-hashtag input-icon"></i>
+                                    <input 
+                                        type="text" 
+                                        id="nif" 
+                                        name="nif" 
+                                        class="form-input" 
+                                        placeholder="0000000000"
+                                        data-mask="nif"
+                                        data-validate='{"required": true, "nif": true}'
+                                        maxlength="10"
+                                        required
+                                    >
+                                </div>
+                                <span class="form-error" style="display: none;"></span>
+                                <span class="form-hint"><i class="fas fa-info-circle"></i> Número de Identificação Fiscal (10 dígitos)</span>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-block" onclick="nextStep(2)" id="btnStep1" disabled>
+                                Próximo <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Etapa 2: Contacto -->
+                        <div id="step2" class="form-step hidden">
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label class="form-label required" for="email">Email</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-envelope input-icon"></i>
+                                        <input 
+                                            type="email" 
+                                            id="email" 
+                                            name="email" 
+                                            class="form-input" 
+                                            placeholder="seu.email@exemplo.com"
+                                            data-validate='{"required": true, "email": true}'
+                                            required
+                                        >
+                                    </div>
+                                    <span class="form-error" style="display: none;"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required" for="telefone">Telefone</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-phone input-icon"></i>
+                                        <input 
+                                            type="tel" 
+                                            id="telefone" 
+                                            name="telefone" 
+                                            class="form-input" 
+                                            placeholder="+244 900 000 000"
+                                            pattern="^(\+244)?9\d{8}$"
+                                            required
+                                        >
+                                    </div>
+                                    <span class="form-error" style="display: none;"></span>
+                                    <span class="form-hint"><i class="fas fa-info-circle"></i> Número de telemóvel angolano</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label class="form-label required" for="provincia">Província</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-map-marker-alt input-icon"></i>
+                                        <select 
+                                            id="provincia" 
+                                            name="provincia" 
+                                            class="form-select"
+                                            data-validate='{"required": true}'
+                                            required
+                                        >
+                                            <option value="">Selecione</option>
+                                            <option value="luanda">Luanda</option>
+                                            <option value="benguela">Benguela</option>
+                                            <option value="huambo">Huambo</option>
+                                            <option value="lubango">Lubango (Huíla)</option>
+                                            <option value="cabinda">Cabinda</option>
+                                            <option value="malanje">Malanje</option>
+                                            <option value="lobito">Lobito</option>
+                                            <option value="uige">Uíge</option>
+                                            <option value="kuito">Kuito (Bié)</option>
+                                            <option value="menongue">Menongue</option>
+                                            <option value="ondo">Ondjiva</option>
+                                            <option value="sumbe">Sumbe</option>
+                                            <option value="n'dalatando">N'dalatando</option>
+                                            <option value="m'banza-kongo">M'banza Kongo</option>
+                                            <option value="saurimo">Saurimo</option>
+                                            <option value="lucapa">Lucapa</option>
+                                            <option value="calulo">Calulo</option>
+                                            <option value="namibe">Namibe</option>
+                                        </select>
+                                    </div>
+                                    <span class="form-error" style="display: none;"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required" for="municipio">Município</label>
+                                    <div class="input-icon-wrapper">
+                                        <i class="fas fa-city input-icon"></i>
+                                        <input 
+                                            type="text" 
+                                            id="municipio" 
+                                            name="municipio" 
+                                            class="form-input" 
+                                            placeholder="Digite o seu município"
+                                            data-validate='{"required": true}'
+                                            required
+                                        >
+                                    </div>
+                                    <span class="form-error" style="display: none;"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label required" for="endereco">Endereço</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-home input-icon" style="top: 1.25rem;"></i>
+                                    <textarea 
+                                        id="endereco" 
+                                        name="endereco" 
+                                        class="form-textarea" 
+                                        placeholder="Digite o seu endereço completo"
+                                        data-validate='{"required": true, "minLength": 10}'
+                                        style="padding-left: 2.75rem;"
+                                        rows="3"
+                                        required
+                                    ></textarea>
+                                </div>
+                                <span class="form-error" style="display: none;"></span>
+                            </div>
+
+                            <div style="display: flex; gap: 1rem;">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(1)" style="flex: 1;">
+                                    <i class="fas fa-arrow-left"></i> Anterior
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="nextStep(3)" id="btnStep2" disabled style="flex: 1;">
+                                    Próximo <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Etapa 3: Segurança -->
+                        <div id="step3" class="form-step hidden">
+                            <div class="form-group">
+                                <label class="form-label required" for="senha">Senha</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input 
+                                        type="password" 
+                                        id="senha" 
+                                        name="senha" 
+                                        class="form-input" 
+                                        placeholder="Crie uma senha segura"
+                                        data-validate='{"required": true, "minLength": 8}'
+                                        required
+                                    >
+                                </div>
+                                <button type="button" class="btn btn-ghost btn-sm" onclick="togglePassword('senha', this)" style="position: absolute; right: 0.5rem; top: 2.25rem; padding: 0.5rem;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <span class="form-error" style="display: none;"></span>
+                                <span class="form-hint"><i class="fas fa-info-circle"></i> Mínimo 8 caracteres, inclua letras e números</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label required" for="confirmarSenha">Confirmar Senha</label>
+                                <div class="input-icon-wrapper">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input 
+                                        type="password" 
+                                        id="confirmarSenha" 
+                                        name="confirmarSenha" 
+                                        class="form-input" 
+                                        placeholder="Confirme a sua senha"
+                                        data-validate='{"required": true, "match": "#senha"}'
+                                        required
+                                    >
+                                </div>
+                                <button type="button" class="btn btn-ghost btn-sm" onclick="togglePassword('confirmarSenha', this)" style="position: absolute; right: 0.5rem; top: 2.25rem; padding: 0.5rem;">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <span class="form-error" style="display: none;"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="termos" required>
+                                    <span class="form-check-label">
+                                        Li e aceito os <a href="#" target="_blank">Termos de Uso</a> e a <a href="#" target="_blank">Política de Privacidade</a>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="notificacoes" checked>
+                                    <span class="form-check-label">
+                                        <i class="fas fa-bell"></i> Desejo receber notificações por email e SMS
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div style="display: flex; gap: 1rem;">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(2)" style="flex: 1;">
+                                    <i class="fas fa-arrow-left"></i> Anterior
+                                </button>
+                                <button type="submit" class="btn btn-success" id="btnRegistro" style="flex: 1;">
+                                    <i class="fas fa-check"></i> Criar Conta
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr style="border: none; border-top: 1px solid var(--gray-200); margin: 1.5rem 0;">
+
+                    <div style="text-align: center;">
+                        <p style="color: var(--gray-500); margin-bottom: 1rem;">Já tem uma conta?</p>
+                        <a href="login.html" class="btn btn-secondary btn-block">
+                            <i class="fas fa-sign-in-alt"></i> Iniciar Sessão
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SIAC</h4>
+                    <p style="color: var(--gray-400); font-size: 0.875rem;">Sistema Integrado de Atendimento ao Cidadão.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="faq.html">Ajuda</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contactos</h4>
+                    <ul>
+                        <li><a href="tel:111">111</a></li>
+                        <li><a href="mailto:suporte@siac.gov.ao">suporte@siac.gov.ao</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 República de Angola - SIAC/DNAICC</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let currentStep = 1;
+
+        // Toggle password visibility
+        function togglePassword(fieldId, btn) {
+            const field = document.getElementById(fieldId);
+            const icon = btn.querySelector('i');
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Atualizar progresso do stepper
+        function updateStepperProgress() {
+            const progress = ((currentStep - 1) / 2) * 100;
+            document.querySelector('.stepper-progress').style.width = progress + '%';
+        }
+
+        // Próximo passo
+        function nextStep(step) {
+            const currentStepEl = document.getElementById(`step${currentStep}`);
+            const inputs = currentStepEl.querySelectorAll('[data-validate]');
+            
+            // Validar campos do passo atual
+            let isValid = true;
+            inputs.forEach(input => {
+                let rules;
+                try {
+                    rules = JSON.parse(input.dataset.validate || '{}');
+                } catch {
+                    rules = {};
+                }
+                const result = SIAC.formValidation.validateField(input, rules);
+                if (!result.valid) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                SIAC.notifications.error('Por favor, preencha todos os campos obrigatórios correctamente');
+                return;
+            }
+
+            // Esconder passo atual
+            currentStepEl.classList.add('hidden');
+            
+            // Mostrar próximo passo
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            
+            // Atualizar stepper
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('completed');
+            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+            
+            currentStep = step;
+            updateStepperProgress();
+        }
+
+        // Passo anterior
+        function prevStep(step) {
+            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.step[data-step="${step}"]`).classList.remove('completed');
+            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+            
+            currentStep = step;
+            updateStepperProgress();
+        }
+
+        // Habilitar/desabilitar botões baseado na validação
+        function setupStepValidation(stepNum) {
+            const stepEl = document.getElementById(`step${stepNum}`);
+            const btn = document.getElementById(`btnStep${stepNum}`);
+            const inputs = stepEl.querySelectorAll('[data-validate]');
+            
+            function checkValidity() {
+                let allFilled = true;
+                inputs.forEach(input => {
+                    let rules;
+                    try {
+                        rules = JSON.parse(input.dataset.validate || '{}');
+                    } catch {
+                        rules = {};
+                    }
+                    if (rules.required && !input.value.trim()) {
+                        allFilled = false;
+                    }
+                });
+                btn.disabled = !allFilled;
+            }
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', checkValidity);
+            });
+            
+            checkValidity();
+        }
+
+        // Setup validation for steps
+        setupStepValidation(1);
+        setupStepValidation(2);
+
+        // Registro form handler
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btnRegistro = document.getElementById('btnRegistro');
+            
+            // Verificar termos
+            if (!document.getElementById('termos').checked) {
+                SIAC.notifications.error('Deve aceitar os Termos de Uso e Política de Privacidade');
+                return;
+            }
+
+            // Coletar dados
+            const userData = {
+                nome: document.getElementById('nomeCompleto').value.trim(),
+                dataNascimento: document.getElementById('dataNascimento').value,
+                genero: document.getElementById('genero').value,
+                nif: document.getElementById('nif').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telefone: document.getElementById('telefone').value.trim(),
+                provincia: document.getElementById('provincia').value,
+                municipio: document.getElementById('municipio').value.trim(),
+                endereco: document.getElementById('endereco').value.trim(),
+                password: document.getElementById('senha').value,
+                notificacoes: document.getElementById('notificacoes').checked
+            };
+
+            // Mostrar loading
+            btnRegistro.disabled = true;
+            btnRegistro.innerHTML = '<span class="spinner spinner-sm"></span> A processar...';
+
+            // Simular delay
+            setTimeout(() => {
+                const result = SIAC.auth.register(userData);
+                
+                if (result.success) {
+                    SIAC.notifications.success(result.message);
+                    setTimeout(() => {
+                        window.location.href = 'minhas-marcacoes.html?welcome=true';
+                    }, 1500);
+                } else {
+                    SIAC.notifications.error(result.message);
+                    btnRegistro.disabled = false;
+                    btnRegistro.innerHTML = '<i class="fas fa-check"></i> Criar Conta';
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

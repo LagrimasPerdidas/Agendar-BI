@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login - Sistema de Agendamento do Bilhete de Identidade. Aceda à sua conta para gerir as suas marcações.">
+    <title>Login - SIAC Bilhete de Identidade | Angola</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇦🇴</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-top-left">
+                    <span class="header-top-item">
+                        <i class="fas fa-phone-alt"></i> Linha de Apoio: 111
+                    </span>
+                    <span class="header-top-item">
+                        <i class="fas fa-envelope"></i> suporte@siac.gov.ao
+                    </span>
+                </div>
+                <div class="header-top-right">
+                    <span class="header-top-item">
+                        <i class="fas fa-globe"></i> República de Angola
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">SIAC</span>
+                        <span class="logo-subtitle">Bilhete de Identidade</span>
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="marcacao.html" class="nav-link">Nova Marcação</a>
+                    <a href="minhas-marcacoes.html" class="nav-link">Minhas Marcações</a>
+                    <a href="faq.html" class="nav-link">Ajuda</a>
+                    <a href="login.html" class="nav-link active">Entrar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container container-narrow" style="padding: 3rem 1.5rem;">
+            <div class="card" style="animation: fadeInUp 0.6s ease-out;">
+                <div class="card-header" style="text-align: center; flex-direction: column;">
+                    <div style="width: 90px; height: 90px; background: var(--angola-red-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; font-size: 2.5rem; color: var(--white); box-shadow: 0 8px 25px rgba(206, 17, 38, 0.35);">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 style="margin: 0;">Iniciar Sessão</h3>
+                    <p style="color: var(--gray-500); margin: 0.5rem 0 0;">Aceda à sua conta SIAC</p>
+                </div>
+                <div class="card-body">
+                    <form id="loginForm" data-validate>
+                        <div class="form-group">
+                            <label class="form-label required" for="email">Email</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input" 
+                                    placeholder="seu.email@exemplo.com"
+                                    data-validate='{"required": true, "email": true}'
+                                    autocomplete="email"
+                                    required
+                                >
+                            </div>
+                            <span class="form-error" style="display: none;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label required" for="password">Senha</label>
+                            <div class="input-icon-wrapper">
+                                <i class="fas fa-lock input-icon"></i>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-input" 
+                                    placeholder="Digite a sua senha"
+                                    data-validate='{"required": true, "minLength": 6}'
+                                    autocomplete="current-password"
+                                    required
+                                >
+                            </div>
+                            <button type="button" class="btn btn-ghost btn-sm" onclick="togglePassword('password', this)" style="position: absolute; right: 0.5rem; top: 2.25rem; padding: 0.5rem;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <span class="form-error" style="display: none;"></span>
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                            <label class="form-check" style="margin: 0;">
+                                <input type="checkbox" class="form-check-input" id="lembrar">
+                                <span class="form-check-label">Lembrar-me</span>
+                            </label>
+                            <a href="recuperar-senha.html" style="font-size: 0.875rem;">Esqueceu a senha?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnLogin">
+                            <i class="fas fa-sign-in-alt"></i> Entrar
+                        </button>
+                    </form>
+
+                    <hr style="border: none; border-top: 1px solid var(--gray-200); margin: 1.5rem 0;">
+
+                    <div style="text-align: center;">
+                        <p style="color: var(--gray-500); margin-bottom: 1rem;">Ainda não tem conta?</p>
+                        <a href="registro.html" class="btn btn-secondary btn-block">
+                            <i class="fas fa-user-plus"></i> Criar Conta
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerta de segurança -->
+            <div class="alert alert-info" style="margin-top: 1.5rem; animation: fadeInUp 0.6s ease-out 0.2s both;">
+                <span class="alert-icon"><i class="fas fa-shield-alt"></i></span>
+                <div class="alert-content">
+                    <div class="alert-title">Segurança</div>
+                    <p style="margin: 0; font-size: 0.875rem;">A sua sessão é protegida. Nunca partilhe a sua senha com terceiros.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SIAC</h4>
+                    <p style="color: var(--gray-400); font-size: 0.875rem;">Sistema Integrado de Atendimento ao Cidadão.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="faq.html">Ajuda</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contactos</h4>
+                    <ul>
+                        <li><a href="tel:111">111</a></li>
+                        <li><a href="mailto:suporte@siac.gov.ao">suporte@siac.gov.ao</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 República de Angola - SIAC/DNAICC</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Toggle password visibility
+        function togglePassword(fieldId, btn) {
+            const field = document.getElementById(fieldId);
+            const icon = btn.querySelector('i');
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btnLogin = document.getElementById('btnLogin');
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Validar formulário
+            const validation = SIAC.formValidation.validateForm(this);
+            if (!validation.valid) {
+                return;
+            }
+
+            // Mostrar loading
+            btnLogin.disabled = true;
+            btnLogin.innerHTML = '<span class="spinner spinner-sm"></span> A entrar...';
+
+            // Simular delay de autenticação
+            setTimeout(() => {
+                const result = SIAC.auth.login(email, password);
+                
+                if (result.success) {
+                    SIAC.notifications.success(result.message);
+                    
+                    // Redirecionar baseado no tipo de usuário
+                    setTimeout(() => {
+                        if (result.user.role === 'admin') {
+                            window.location.href = 'admin-dashboard.html';
+                        } else {
+                            window.location.href = 'minhas-marcacoes.html';
+                        }
+                    }, 1000);
+                } else {
+                    SIAC.notifications.error(result.message);
+                    btnLogin.disabled = false;
+                    btnLogin.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar';
+                }
+            }, 1500);
+        });
+
+        // Verificar se há mensagem de redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        const message = urlParams.get('message');
+        if (message) {
+            SIAC.notifications.success(decodeURIComponent(message));
+        }
+    </script>
+</body>
+</html>

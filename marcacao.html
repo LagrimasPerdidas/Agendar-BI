@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nova Marcação - Agende o seu atendimento para o Bilhete de Identidade.">
+    <title>Nova Marcação - SIAC Bilhete de Identidade | Angola</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇦🇴</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-top-left">
+                    <span class="header-top-item">
+                        <span>📞</span> Linha de Apoio: 111
+                    </span>
+                    <span class="header-top-item">
+                        <span>✉️</span> suporte@siac.gov.ao
+                    </span>
+                </div>
+                <div class="header-top-right">
+                    <span class="header-top-item">
+                        <span>🌐</span> República de Angola
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">🇦🇴</div>
+                    <div class="logo-text">
+                        <span class="logo-title">SIAC</span>
+                        <span class="logo-subtitle">Bilhete de Identidade</span>
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    ☰
+                </button>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="marcacao.html" class="nav-link active">Nova Marcação</a>
+                    <a href="minhas-marcacoes.html" class="nav-link">Minhas Marcações</a>
+                    <a href="faq.html" class="nav-link">Ajuda</a>
+                    <a href="login.html" class="nav-link">Entrar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container" style="max-width: 900px; padding: 2rem 1.5rem;">
+            <div class="card">
+                <div class="card-header">
+                    <h3><span>🗓️</span> Nova Marcação</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Stepper -->
+                    <div class="stepper">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <span class="step-label">Serviço</span>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <span class="step-label">Posto</span>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <span class="step-label">Data</span>
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-number">4</div>
+                            <span class="step-label">Dados</span>
+                        </div>
+                        <div class="step" data-step="5">
+                            <div class="step-number">5</div>
+                            <span class="step-label">Confirmação</span>
+                        </div>
+                    </div>
+
+                    <form id="marcacaoForm" data-validate>
+                        <!-- Etapa 1: Escolha do Serviço -->
+                        <div id="step1" class="form-step">
+                            <h4 style="margin-bottom: 1.5rem;">Escolha o tipo de serviço</h4>
+                            
+                            <div class="grid grid-3" style="margin-bottom: 2rem;">
+                                <div class="service-card" data-servico="primeira-via" onclick="selectServico('primeira-via')">
+                                    <div class="service-icon">🆕</div>
+                                    <h3>1ª Via do BI</h3>
+                                    <p>Emissão do primeiro Bilhete de Identidade</p>
+                                    <div class="service-price">3.500 Kz</div>
+                                </div>
+                                <div class="service-card" data-servico="renovacao" onclick="selectServico('renovacao')">
+                                    <div class="service-icon">🔄</div>
+                                    <h3>Renovação de BI</h3>
+                                    <p>Renovação do BI vencido</p>
+                                    <div class="service-price">2.500 Kz</div>
+                                </div>
+                                <div class="service-card" data-servico="segunda-via" onclick="selectServico('segunda-via')">
+                                    <div class="service-icon">📄</div>
+                                    <h3>2ª Via do BI</h3>
+                                    <p>Emissão de segunda via</p>
+                                    <div class="service-price">5.000 Kz</div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="servico" name="servico" data-validate='{"required": true}' required>
+                            <span class="form-error" id="servicoError" style="display: none; color: var(--error); text-align: center; display: block;">Por favor, seleccione um serviço</span>
+
+                            <div style="display: flex; justify-content: flex-end;">
+                                <button type="button" class="btn btn-primary" onclick="nextStep(2)" id="btnStep1" disabled>
+                                    Próximo <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Etapa 2: Escolha do Posto -->
+                        <div id="step2" class="form-step hidden">
+                            <h4 style="margin-bottom: 1.5rem;">Seleccione o posto SIAC</h4>
+                            
+                            <div id="listaPostos" style="margin-bottom: 2rem;">
+                                <!-- Postos serão carregados dinamicamente -->
+                            </div>
+
+                            <input type="hidden" id="postoId" name="postoId" data-validate='{"required": true}' required>
+                            <span class="form-error" id="postoError" style="display: none; color: var(--error); text-align: center; display: block;">Por favor, seleccione um posto</span>
+
+                            <div style="display: flex; justify-content: space-between;">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(1)">
+                                    ← Anterior
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="nextStep(3)" id="btnStep2" disabled>
+                                    Próximo <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Etapa 3: Escolha da Data e Horário -->
+                        <div id="step3" class="form-step hidden">
+                            <h4 style="margin-bottom: 1.5rem;">Escolha a data e horário</h4>
+                            
+                            <div class="form-group">
+                                <label class="form-label required" for="data">Data do Atendimento</label>
+                                <input 
+                                    type="date" 
+                                    id="data" 
+                                    name="data" 
+                                    class="form-input"
+                                    data-validate='{"required": true}'
+                                    required
+                                >
+                                <span class="form-hint">Selecione uma data com vagas disponíveis</span>
+                                <span class="form-error" style="display: none;"></span>
+                            </div>
+
+                            <div id="vagasInfo" style="margin-bottom: 1.5rem;"></div>
+
+                            <div class="form-group">
+                                <label class="form-label required" for="horario">Horário</label>
+                                <select 
+                                    id="horario" 
+                                    name="horario" 
+                                    class="form-select"
+                                    data-validate='{"required": true}'
+                                    required
+                                >
+                                    <option value="">Selecione o horário</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                </select>
+                                <span class="form-error" style="display: none;"></span>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between;">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(2)">
+                                    ← Anterior
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+                                    Próximo <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Etapa 4: Dados Pessoais -->
+                        <div id="step4" class="form-step hidden">
+                            <h4 style="margin-bottom: 1.5rem;">Confirme os seus dados</h4>
+                            
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label class="form-label required" for="nome">Nome Completo</label>
+                                    <input 
+                                        type="text" 
+                                        id="nome" 
+                                        name="nome" 
+                                        class="form-input" 
+                                        placeholder="Digite o seu nome completo"
+                                        data-validate='{"required": true, "minLength": 5}'
+                                        required
+                                    >
+                                    <span class="form-error" style="display: none;"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required" for="bi">Número do BI (se aplicável)</label>
+                                    <input 
+                                        type="text" 
+                                        id="bi" 
+                                        name="bi" 
+                                        class="form-input" 
+                                        placeholder="000000000AA000"
+                                        data-mask="bi"
+                                        data-validate='{"bi": true}'
+                                    >
+                                    <span class="form-error" style="display: none;"></span>
+                                    <span class="form-hint">Deixe em branco para 1ª via</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label class="form-label required" for="emailMarcacao">Email</label>
+                                    <input 
+                                        type="email" 
+                                        id="emailMarcacao" 
+                                        name="email" 
+                                        class="form-input" 
+                                        placeholder="seu.email@exemplo.com"
+                                        data-validate='{"required": true, "email": true}'
+                                        required
+                                    >
+                                    <span class="form-error" style="display: none;"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label required" for="telefoneMarcacao">Telefone</label>
+                                    <input 
+                                        type="tel" 
+                                        id="telefoneMarcacao" 
+                                        name="telefone" 
+                                        class="form-input" 
+                                        placeholder="+244 900 000 000"
+                                        data-mask="phone"
+                                        data-validate='{"required": true, "phone": true}'
+                                        required
+                                    >
+                                    <span class="form-error" style="display: none;"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="observacoes">Observações (opcional)</label>
+                                <textarea 
+                                    id="observacoes" 
+                                    name="observacoes" 
+                                    class="form-textarea" 
+                                    placeholder="Alguma informação adicional que deseje comunicar"
+                                    rows="3"
+                                ></textarea>
+                            </div>
+
+                            <div class="alert alert-info">
+                                <span class="alert-icon">📋</span>
+                                <div class="alert-content">
+                                    <div class="alert-title">Documentos Necessários</div>
+                                    <p style="margin: 0; font-size: 0.875rem;" id="documentosNecessarios">
+                                        Certidão de nascimento, Fotografia tipo passe, Comprovativo de residência
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between;">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(3)">
+                                    ← Anterior
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="nextStep(5)">
+                                    Próximo <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Etapa 5: Confirmação -->
+                        <div id="step5" class="form-step hidden">
+                            <h4 style="margin-bottom: 1.5rem;">Confirme a sua marcação</h4>
+                            
+                            <div class="card" style="background: var(--gray-50); margin-bottom: 2rem;">
+                                <div class="card-body">
+                                    <h5 style="margin-bottom: 1rem; color: var(--angola-red);">Resumo da Marcação</h5>
+                                    
+                                    <div style="display: grid; gap: 0.75rem;">
+                                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--gray-200);">
+                                            <span style="color: var(--gray-500);">Serviço:</span>
+                                            <span id="resumoServico" style="font-weight: 600;">-</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--gray-200);">
+                                            <span style="color: var(--gray-500);">Posto:</span>
+                                            <span id="resumoPosto" style="font-weight: 600;">-</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--gray-200);">
+                                            <span style="color: var(--gray-500);">Data:</span>
+                                            <span id="resumoData" style="font-weight: 600;">-</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--gray-200);">
+                                            <span style="color: var(--gray-500);">Horário:</span>
+                                            <span id="resumoHorario" style="font-weight: 600;">-</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--gray-200);">
+                                            <span style="color: var(--gray-500);">Nome:</span>
+                                            <span id="resumoNome" style="font-weight: 600;">-</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; padding: 0.5rem 0;">
+                                            <span style="color: var(--gray-500);">Valor a Pagar:</span>
+                                            <span id="resumoValor" style="font-weight: 700; color: var(--angola-green); font-size: 1.25rem;">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="confirmarDados" required>
+                                    <span class="form-check-label">Confirmo que os dados apresentados estão correctos</span>
+                                </label>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between;">
+                                <button type="button" class="btn btn-outline" onclick="prevStep(4)">
+                                    ← Anterior
+                                </button>
+                                <button type="submit" class="btn btn-success btn-lg" id="btnConfirmar">
+                                    <span>✓</span> Confirmar Marcação
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal-overlay" id="modalConfirmacao">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>✓ Marcação Confirmada!</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div style="width: 100px; height: 100px; background: var(--success-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem;">
+                    🎉
+                </div>
+                <p style="font-size: 1.125rem; margin-bottom: 1rem;">A sua marcação foi realizada com sucesso!</p>
+                <div style="background: var(--gray-100); padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
+                    <p style="margin: 0; color: var(--gray-500);">Código de Confirmação:</p>
+                    <p id="codigoConfirmacao" style="font-size: 1.5rem; font-weight: 700; color: var(--angola-red); margin: 0.5rem 0;">-</p>
+                    <p style="margin: 0; font-size: 0.875rem; color: var(--gray-500);">Guarde este código para consultar a sua marcação</p>
+                </div>
+                <p style="color: var(--gray-600); font-size: 0.9375rem;">Um email de confirmação foi enviado para o seu endereço.</p>
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                <a href="minhas-marcacoes.html" class="btn btn-primary">
+                    Ver Minhas Marcações
+                </a>
+                <a href="index.html" class="btn btn-outline">
+                    Voltar ao Início
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SIAC</h4>
+                    <p style="color: var(--gray-400); font-size: 0.875rem;">Sistema Integrado de Atendimento ao Cidadão para emissão e gestão do Bilhete de Identidade em Angola.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="marcacao.html">Nova Marcação</a></li>
+                        <li><a href="minhas-marcacoes.html">Minhas Marcações</a></li>
+                        <li><a href="faq.html">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contactos</h4>
+                    <ul>
+                        <li><a href="tel:111">Linha de Apoio: 111</a></li>
+                        <li><a href="mailto:suporte@siac.gov.ao">suporte@siac.gov.ao</a></li>
+                        <li><span style="color: var(--gray-400);">Luanda, Angola</span></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Acessibilidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 República de Angola - SIAC/DNAICC. Todos os direitos reservados.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let currentStep = 1;
+        let selectedServico = null;
+        let selectedPosto = null;
+        const servicosInfo = {
+            'primeira-via': { nome: '1ª Via do BI', preco: 3500, documentos: 'Certidão de nascimento, Fotografia tipo passe, Comprovativo de residência' },
+            'renovacao': { nome: 'Renovação de BI', preco: 2500, documentos: 'BI anterior, Fotografia tipo passe, Comprovativo de residência actualizado' },
+            'segunda-via': { nome: '2ª Via do BI', preco: 5000, documentos: 'Declaração de perda/furto (polícia), Fotografia tipo passe, Comprovativo de residência' }
+        };
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarPostos();
+            
+            // Verificar se há serviço pré-selecionado na URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const servico = urlParams.get('servico');
+            if (servico && servicosInfo[servico]) {
+                selectServico(servico);
+            }
+
+            // Configurar data mínima (amanhã)
+            const amanha = new Date();
+            amanha.setDate(amanha.getDate() + 1);
+            document.getElementById('data').min = amanha.toISOString().split('T')[0];
+
+            // Atualizar vagas ao mudar data
+            document.getElementById('data').addEventListener('change', atualizarVagas);
+        });
+
+        function carregarPostos() {
+            const postos = SIAC.storage.getPostos().filter(p => p.ativo);
+            const container = document.getElementById('listaPostos');
+            
+            container.innerHTML = postos.map(posto => `
+                <div class="info-card" style="margin-bottom: 1rem; cursor: pointer;" onclick="selectPosto(${posto.id})" data-posto="${posto.id}">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h5 style="margin-bottom: 0.5rem; color: var(--angola-red);">${posto.nome}</h5>
+                            <p style="margin: 0; color: var(--gray-500); font-size: 0.875rem;">📍 ${posto.endereco}</p>
+                            <p style="margin: 0.25rem 0 0; color: var(--gray-500); font-size: 0.875rem;">📞 ${posto.telefone}</p>
+                        </div>
+                        <div class="posto-radio" style="width: 24px; height: 24px; border: 2px solid var(--gray-300); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <div class="posto-radio-inner" style="width: 12px; height: 12px; background: var(--angola-red); border-radius: 50%; display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectServico(servico) {
+            selectedServico = servico;
+            document.getElementById('servico').value = servico;
+            
+            // Atualizar UI
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelector(`[data-servico="${servico}"]`).classList.add('selected');
+            
+            document.getElementById('servicoError').style.display = 'none';
+            document.getElementById('btnStep1').disabled = false;
+
+            // Atualizar documentos necessários
+            if (servicosInfo[servico]) {
+                document.getElementById('documentosNecessarios').textContent = servicosInfo[servico].documentos;
+            }
+        }
+
+        function selectPosto(postoId) {
+            selectedPosto = SIAC.storage.getPostos().find(p => p.id === postoId);
+            document.getElementById('postoId').value = postoId;
+            
+            // Atualizar UI
+            document.querySelectorAll('[data-posto]').forEach(card => {
+                card.style.borderColor = 'transparent';
+                card.querySelector('.posto-radio').style.borderColor = 'var(--gray-300)';
+                card.querySelector('.posto-radio-inner').style.display = 'none';
+            });
+            
+            const selectedCard = document.querySelector(`[data-posto="${postoId}"]`);
+            selectedCard.style.borderColor = 'var(--angola-red)';
+            selectedCard.querySelector('.posto-radio').style.borderColor = 'var(--angola-red)';
+            selectedCard.querySelector('.posto-radio-inner').style.display = 'block';
+            
+            document.getElementById('postoError').style.display = 'none';
+            document.getElementById('btnStep2').disabled = false;
+
+            // Atualizar vagas
+            atualizarVagas();
+        }
+
+        function atualizarVagas() {
+            const data = document.getElementById('data').value;
+            const vagasInfo = document.getElementById('vagasInfo');
+            
+            if (!selectedPosto || !data) {
+                vagasInfo.innerHTML = '';
+                return;
+            }
+
+            const vagas = selectedPosto.vagas[data] || 0;
+            const ocupadas = SIAC.storage.getMarcacoes().filter(m => 
+                m.postoId === selectedPosto.id && 
+                m.data === data && 
+                m.status !== 'cancelada'
+            ).length;
+            const disponiveis = Math.max(0, vagas - ocupadas);
+
+            vagasInfo.innerHTML = `
+                <div class="alert ${disponiveis > 10 ? 'alert-success' : disponiveis > 0 ? 'alert-warning' : 'alert-error'}">
+                    <span class="alert-icon">${disponiveis > 10 ? '✓' : disponiveis > 0 ? '⚠' : '✕'}</span>
+                    <div class="alert-content">
+                        <div class="alert-title">Vagas Disponíveis</div>
+                        <p style="margin: 0; font-size: 0.875rem;">
+                            ${disponiveis > 0 
+                                ? `Existem <strong>${disponiveis}</strong> vagas disponíveis para esta data.` 
+                                : 'Não há vagas disponíveis para esta data. Por favor, seleccione outra data.'}
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function nextStep(step) {
+            // Validar passo atual
+            const currentStepEl = document.getElementById(`step${currentStep}`);
+            const inputs = currentStepEl.querySelectorAll('[data-validate]');
+            
+            let isValid = true;
+            inputs.forEach(input => {
+                const rules = JSON.parse(input.dataset.validate || '{}');
+                if (!SIAC.formValidation.validateField(input, rules)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                SIAC.notifications.error('Por favor, preencha todos os campos obrigatórios correctamente');
+                return;
+            }
+
+            // Esconder passo atual
+            currentStepEl.classList.add('hidden');
+            
+            // Mostrar próximo passo
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            
+            // Atualizar stepper
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('completed');
+            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+            
+            currentStep = step;
+
+            // Se for o passo 5, atualizar resumo
+            if (step === 5) {
+                atualizarResumo();
+            }
+        }
+
+        function prevStep(step) {
+            document.getElementById(`step${currentStep}`).classList.add('hidden');
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            
+            document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+            document.querySelector(`.step[data-step="${step}"]`).classList.remove('completed');
+            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+            
+            currentStep = step;
+        }
+
+        function atualizarResumo() {
+            const servico = document.getElementById('servico').value;
+            const postoId = document.getElementById('postoId').value;
+            const posto = SIAC.storage.getPostos().find(p => p.id === parseInt(postoId));
+            
+            document.getElementById('resumoServico').textContent = servicosInfo[servico]?.nome || '-';
+            document.getElementById('resumoPosto').textContent = posto?.nome || '-';
+            document.getElementById('resumoData').textContent = SIAC.utils.formatDate(document.getElementById('data').value);
+            document.getElementById('resumoHorario').textContent = document.getElementById('horario').value;
+            document.getElementById('resumoNome').textContent = document.getElementById('nome').value;
+            document.getElementById('resumoValor').textContent = SIAC.utils.formatCurrency(servicosInfo[servico]?.preco || 0);
+        }
+
+        // Submissão do formulário
+        document.getElementById('marcacaoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!document.getElementById('confirmarDados').checked) {
+                SIAC.notifications.error('Deve confirmar que os dados estão correctos');
+                return;
+            }
+
+            const btnConfirmar = document.getElementById('btnConfirmar');
+            btnConfirmar.disabled = true;
+            btnConfirmar.innerHTML = '<span class="spinner" style="width: 20px; height: 20px; border-width: 2px;"></span> A processar...';
+
+            const user = SIAC.session.getUser();
+            
+            const marcacaoData = {
+                userId: user ? user.id : null,
+                servico: document.getElementById('servico').value,
+                postoId: document.getElementById('postoId').value,
+                data: document.getElementById('data').value,
+                horario: document.getElementById('horario').value,
+                nome: document.getElementById('nome').value.trim(),
+                bi: document.getElementById('bi').value.trim(),
+                email: document.getElementById('emailMarcacao').value.trim(),
+                telefone: document.getElementById('telefoneMarcacao').value.trim(),
+                observacoes: document.getElementById('observacoes').value.trim(),
+                valor: servicosInfo[document.getElementById('servico').value]?.preco || 0
+            };
+
+            setTimeout(() => {
+                const result = SIAC.marcacoes.create(marcacaoData);
+                
+                if (result.success) {
+                    document.getElementById('codigoConfirmacao').textContent = result.marcacao.codigo;
+                    SIAC.modals.open('modalConfirmacao');
+                    SIAC.notifications.success(result.message);
+                } else {
+                    SIAC.notifications.error(result.message);
+                    btnConfirmar.disabled = false;
+                    btnConfirmar.innerHTML = '<span>✓</span> Confirmar Marcação';
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
