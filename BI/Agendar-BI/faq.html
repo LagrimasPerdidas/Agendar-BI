@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Perguntas Frequentes - Sistema de Agendamento do Bilhete de Identidade.">
+    <title>Perguntas Frequentes - SIAC Bilhete de Identidade | Angola</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇦🇴</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-top-left">
+                    <span class="header-top-item">
+                        <span>📞</span> Linha de Apoio: 111
+                    </span>
+                    <span class="header-top-item">
+                        <span>✉️</span> suporte@siac.gov.ao
+                    </span>
+                </div>
+                <div class="header-top-right">
+                    <span class="header-top-item">
+                        <span>🌐</span> República de Angola
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">🇦🇴</div>
+                    <div class="logo-text">
+                        <span class="logo-title">SIAC</span>
+                        <span class="logo-subtitle">Bilhete de Identidade</span>
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    ☰
+                </button>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="marcacao.html" class="nav-link">Nova Marcação</a>
+                    <a href="minhas-marcacoes.html" class="nav-link">Minhas Marcações</a>
+                    <a href="faq.html" class="nav-link active">Ajuda</a>
+                    <a href="login.html" class="nav-link">Entrar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section style="background: linear-gradient(135deg, var(--angola-red) 0%, var(--angola-red-dark) 100%); color: white; padding: 3rem 0;">
+            <div class="container" style="text-align: center;">
+                <h1 style="color: white; margin-bottom: 1rem;">Como podemos ajudar?</h1>
+                <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto;">Encontre respostas para as perguntas mais frequentes sobre o sistema de agendamento do Bilhete de Identidade.</p>
+                
+                <!-- Busca -->
+                <div style="max-width: 600px; margin: 2rem auto 0;">
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="buscaFaq" 
+                            class="form-input" 
+                            placeholder="Pesquise a sua dúvida..."
+                            style="background: white; border: none;"
+                            onkeyup="buscarFaq()"
+                        >
+                        <button type="button" class="btn" style="background: var(--angola-black); color: white;">
+                            🔍
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Content -->
+        <section class="section">
+            <div class="container">
+                <!-- Categorias -->
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                    <a href="#geral" class="btn btn-outline">Geral</a>
+                    <a href="#documentos" class="btn btn-outline">Documentos</a>
+                    <a href="#horarios" class="btn btn-outline">Horários</a>
+                    <a href="#pagamento" class="btn btn-outline">Pagamento</a>
+                    <a href="#notificacoes" class="btn btn-outline">Notificações</a>
+                    <a href="#problemas" class="btn btn-outline">Problemas</a>
+                </div>
+
+                <!-- Geral -->
+                <div id="geral" class="faq-section" style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--angola-red); margin-bottom: 1.5rem;">📌 Geral</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O que é o sistema SIAC de agendamento?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O Sistema Integrado de Atendimento ao Cidadão (SIAC) é uma plataforma digital desenvolvida pelo Governo de Angola para facilitar o agendamento de serviços relacionados ao Bilhete de Identidade. Permite aos cidadãos marcarem atendimentos nos postos SIAC de forma rápida e conveniente, evitando filas e tempo de espera.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quem pode usar o sistema de agendamento?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Qualquer cidadão angolano maior de 18 anos pode utilizar o sistema para:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Solicitar a 1ª via do Bilhete de Identidade</li>
+                                <li>Renovar o BI vencido</li>
+                                <li>Solicitar 2ª via em caso de perda, furto ou deterioração</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Preciso criar uma conta para fazer uma marcação?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, é necessário criar uma conta para realizar marcações. O registo é gratuito e permite:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Gerenciar todas as suas marcações</li>
+                                <li>Receber notificações e lembretes</li>
+                                <li>Cancelar ou remarcar atendimentos</li>
+                                <li>Consultar o histórico de serviços</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Como funciona o processo de agendamento?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O processo de agendamento é simples e rápido:</p>
+                            <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Crie uma conta ou faça login</li>
+                                <li>Escolha o tipo de serviço (1ª via, renovação ou 2ª via)</li>
+                                <li>Seleccione o posto SIAC mais conveniente</li>
+                                <li>Escolha a data e horário disponíveis</li>
+                                <li>Preencha os dados pessoais</li>
+                                <li>Confirme a marcação e guarde o código</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentos -->
+                <div id="documentos" class="faq-section" style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--angola-red); margin-bottom: 1.5rem;">📋 Documentos Necessários</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quais documentos preciso para a 1ª via do BI?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Para solicitar a 1ª via do Bilhete de Identidade, necessita de:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>Certidão de nascimento</strong> original ou cópia autenticada</li>
+                                <li><strong>Fotografia tipo passe</strong> recente (fundo branco)</li>
+                                <li><strong>Comprovativo de residência</strong> (factura de água, luz ou telefone)</li>
+                                <li><strong>NIF</strong> (Número de Identificação Fiscal)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quais documentos preciso para renovar o BI?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Para renovar o Bilhete de Identidade, necessita de:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>BI anterior</strong> (mesmo que vencido)</li>
+                                <li><strong>Fotografia tipo passe</strong> recente (fundo branco)</li>
+                                <li><strong>Comprovativo de residência atualizado</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quais documentos preciso para a 2ª via do BI?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Para solicitar a 2ª via do Bilhete de Identidade, necessita de:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>Declaração de perda/furto</strong> da polícia (no caso de perda ou furto)</li>
+                                <li><strong>Fotografia tipo passe</strong> recente (fundo branco)</li>
+                                <li><strong>Comprovativo de residência</strong></li>
+                                <li><strong>Cópia do BI</strong> (se disponível)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>As fotografias têm algum requisito específico?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, as fotografias devem cumprir os seguintes requisitos:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Tamanho 3x4 cm (tipo passe)</li>
+                                <li>Fundo branco e liso</li>
+                                <li>Rosto descoberto (sem óculos de sol, chapéu ou lenços)</li>
+                                <li>Expressão neutra</li>
+                                <li>Foto recente (menos de 6 meses)</li>
+                                <li>Boa qualidade de imagem</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Horários -->
+                <div id="horarios" class="faq-section" style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--angola-red); margin-bottom: 1.5rem;">⏰ Horários</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Qual o horário de funcionamento dos postos SIAC?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Os postos SIAC funcionam de:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>Segunda a Sexta-feira:</strong> 08:00 - 15:00</li>
+                                <li><strong>Sábados, Domingos e Feriados:</strong> Encerrado</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">Recomendamos que chegue com <strong>15 minutos de antecedência</strong> do horário marcado.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Com quanto tempo de antecedência devo chegar?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Deve chegar ao posto SIAC com <strong>15 minutos de antecedência</strong> do horário marcado. Esta antecedência permite:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Confirmar a sua presença no sistema</li>
+                                <li>Verificar a documentação</li>
+                                <li>Ser atendido no horário previsto</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;"><strong>Nota:</strong> Se chegar com mais de 15 minutos de atraso, a marcação poderá ser cancelada.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Posso remarcar o meu atendimento?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, pode remarcar o seu atendimento seguindo estas condições:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>A remarcação deve ser feita com pelo menos <strong>24 horas de antecedência</strong></li>
+                                <li>Apenas marcações com status "Pendente" ou "Confirmada" podem ser remarcadas</li>
+                                <li>Pode remarcar diretamente no sistema, na secção "Minhas Marcações"</li>
+                                <li>A nova data estará sujeita à disponibilidade de vagas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagamento -->
+                <div id="pagamento" class="faq-section" style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--angola-red); margin-bottom: 1.5rem;">💳 Pagamento</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quanto custa cada serviço?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Os valores dos serviços são os seguintes:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>1ª Via do BI:</strong> 3.500 Kz</li>
+                                <li><strong>Renovação de BI:</strong> 2.500 Kz</li>
+                                <li><strong>2ª Via do BI:</strong> 5.000 Kz</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">Estes valores estão sujeitos a alterações por deliberação governamental.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Quais as formas de pagamento aceites?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>O pagamento pode ser realizado das seguintes formas:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>Dinheiro</strong> (no local do atendimento)</li>
+                                <li><strong>Multicaixa</strong> (débito directo)</li>
+                                <li><strong>Transferência bancária</strong> (com comprovativo)</li>
+                                <li><strong>Referência de pagamento</strong> (gerada no sistema)</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">O pagamento é feito <strong>no momento do atendimento</strong>, não sendo necessário pagar no acto da marcação.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O pagamento é reembolsável se cancelar?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Como o pagamento é feito apenas no momento do atendimento, não há valores a reembolsar em caso de cancelamento da marcação. No entanto, se já tiver efectuado algum pagamento antecipado, deverá:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Contactar o posto SIAC onde fez o pagamento</li>
+                                <li>Apresentar o comprovativo de pagamento</li>
+                                <li>Solicitar o reembolso segundo as normas em vigor</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notificações -->
+                <div id="notificacoes" class="faq-section" style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--angola-red); margin-bottom: 1.5rem;">📱 Notificações</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Receberei confirmação da minha marcação?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, após confirmar a sua marcação, receberá:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>Email de confirmação</strong> com todos os detalhes da marcação</li>
+                                <li><strong>SMS de confirmação</strong> (se optou por notificações)</li>
+                                <li><strong>Código único</strong> de confirmação para consulta</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">Verifique também a pasta de <strong>Spam/Lixo</strong> do seu email se não receber a confirmação.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Receberei lembretes antes do atendimento?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim, o sistema envia lembretes automáticos:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>24 horas antes</strong> do atendimento (email e SMS)</li>
+                                <li><strong>2 horas antes</strong> do atendimento (SMS)</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">Para receber os lembretes, certifique-se de que:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>O seu email e telefone estão correctos no sistema</li>
+                                <li>Optou por receber notificações no registo</li>
+                                <li>O seu telefone está ligado e com rede</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problemas -->
+                <div id="problemas" class="faq-section" style="margin-bottom: 3rem;">
+                    <h3 style="color: var(--angola-red); margin-bottom: 1.5rem;">🔧 Problemas e Suporte</h3>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Não recebi o email de confirmação. O que fazer?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Se não recebeu o email de confirmação:</p>
+                            <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Verifique a pasta de <strong>Spam/Lixo Eletrónico</strong></li>
+                                <li>Verifique se o email está correcto no seu perfil</li>
+                                <li>Consulte a sua marcação em "Minhas Marcações"</li>
+                                <li>Se o problema persistir, contacte o suporte:</li>
+                            </ol>
+                            <p style="margin-top: 0.5rem;">
+                                📞 Linha de Apoio: <strong>111</strong><br>
+                                ✉️ Email: <strong>suporte@siac.gov.ao</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Esqueci-me do código da minha marcação. Como recuperar?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Para recuperar o código da sua marcação:</p>
+                            <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Faça login na sua conta</li>
+                                <li>Aceda a "Minhas Marcações"</li>
+                                <li>O código será exibido em cada marcação</li>
+                            </ol>
+                            <p style="margin-top: 0.5rem;">Alternativamente, pode consultar o email de confirmação enviado no momento da marcação.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>O sistema não está a funcionar. O que fazer?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Se estiver a ter problemas técnicos com o sistema:</p>
+                            <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Actualize a página (F5 ou Ctrl+R)</li>
+                                <li>Limpe o cache do navegador</li>
+                                <li>Tente aceder noutro navegador (Chrome, Firefox, Edge)</li>
+                                <li>Verifique a sua ligação à internet</li>
+                                <li>Desactive temporariamente bloqueadores de pop-ups</li>
+                            </ol>
+                            <p style="margin-top: 0.5rem;">Se o problema persistir, contacte o suporte técnico:</p>
+                            <p style="margin-top: 0.5rem;">
+                                📞 Linha de Apoio: <strong>111</strong><br>
+                                ✉️ Email: <strong>suporte@siac.gov.ao</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Como contacto o suporte?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Pode contactar o suporte do SIAC através de:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li><strong>Telefone:</strong> 111 (Linha de Apoio gratuita)</li>
+                                <li><strong>Email:</strong> suporte@siac.gov.ao</li>
+                                <li><strong>Horário de atendimento:</strong> Segunda a Sexta, 08:00 - 17:00</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem;">Para um atendimento mais rápido, tenha consigo:</p>
+                            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                                <li>Código da marcação (se aplicável)</li>
+                                <li>Número do BI ou NIF</li>
+                                <li>Email registado no sistema</li>
+                                <li>Descrição detalhada do problema</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacto -->
+                <div class="card" style="background: linear-gradient(135deg, var(--angola-red) 0%, var(--angola-red-dark) 100%); color: white;">
+                    <div class="card-body" style="text-align: center;">
+                        <h3 style="color: white; margin-bottom: 1rem;">Ainda tem dúvidas?</h3>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 1.5rem;">A nossa equipa de suporte está disponível para ajudar.</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <a href="tel:111" class="btn" style="background: white; color: var(--angola-red);">
+                                📞 Ligar 111
+                            </a>
+                            <a href="mailto:suporte@siac.gov.ao" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white;">
+                                ✉️ Enviar Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SIAC</h4>
+                    <p style="color: var(--gray-400); font-size: 0.875rem;">Sistema Integrado de Atendimento ao Cidadão para emissão e gestão do Bilhete de Identidade em Angola.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="marcacao.html">Nova Marcação</a></li>
+                        <li><a href="minhas-marcacoes.html">Minhas Marcações</a></li>
+                        <li><a href="faq.html">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contactos</h4>
+                    <ul>
+                        <li><a href="tel:111">Linha de Apoio: 111</a></li>
+                        <li><a href="mailto:suporte@siac.gov.ao">suporte@siac.gov.ao</a></li>
+                        <li><span style="color: var(--gray-400);">Luanda, Angola</span></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Acessibilidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 República de Angola - SIAC/DNAICC. Todos os direitos reservados.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function buscarFaq() {
+            const termo = document.getElementById('buscaFaq').value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+            const sections = document.querySelectorAll('.faq-section');
+
+            faqItems.forEach(item => {
+                const pergunta = item.querySelector('.faq-question').textContent.toLowerCase();
+                const resposta = item.querySelector('.faq-answer').textContent.toLowerCase();
+                
+                if (pergunta.includes(termo) || resposta.includes(termo)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = termo === '' ? 'block' : 'none';
+                }
+            });
+
+            // Mostrar/esconder seções baseado em resultados
+            sections.forEach(section => {
+                const visibleItems = section.querySelectorAll('.faq-item[style="display: block;"], .faq-item:not([style])');
+                section.style.display = visibleItems.length > 0 || termo === '' ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

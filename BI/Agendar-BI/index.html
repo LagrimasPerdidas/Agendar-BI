@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Agendamento do Bilhete de Identidade - República de Angola. Marque o seu atendimento de forma rápida e simples nos postos SIAC.">
+    <meta name="keywords" content="Bilhete de Identidade, Angola, SIAC, DNAICC, Agendamento, BI">
+    <meta name="author" content="República de Angola - SIAC">
+    <meta name="theme-color" content="#CE1126">
+    <title>PIV - Sistema de Agendamento do Bilhete de Identidade | Angola</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇦🇴</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-top-left">
+                    <span class="header-top-item">
+                        <i class="fas fa-phone-alt"></i> Linha de Apoio: 111
+                    </span>
+                    <span class="header-top-item">
+                        <i class="fas fa-envelope"></i> suporte@piv.gov.ao
+                    </span>
+                </div>
+                <div class="header-top-right">
+                    <span class="header-top-item">
+                        <i class="fas fa-globe"></i> República de Angola
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-title">PIV</span>
+                        <span class="logo-subtitle">Bilhete de Identidade</span>
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fas fa-home"></i> Início
+                    </a>
+                    <a href="marcacao.html" class="nav-link">
+                        <i class="fas fa-calendar-plus"></i> Nova Marcação
+                    </a>
+                    <a href="minhas-marcacoes.html" class="nav-link">
+                        <i class="fas fa-list-alt"></i> Minhas Marcações
+                    </a>
+                    <a href="faq.html" class="nav-link">
+                        <i class="fas fa-question-circle"></i> Ajuda
+                    </a>
+                    <a href="login.html" class="nav-link">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Agende o seu <span>Bilhete de Identidade</span></h1>
+                <p>Evite filas e aguarde menos tempo. Marque o seu atendimento no posto de identificação de viana de forma rápida, simples e segura.</p>
+                <div class="hero-actions">
+                    <a href="marcacao.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-calendar-check"></i> Fazer Marcação
+                    </a>
+                    <a href="minhas-marcacoes.html" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-search"></i> Consultar Marcação
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="section features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Serviços Disponíveis</h2>
+                    <p>Escolha o serviço que melhor se adequa às suas necessidades</p>
+                </div>
+                <div class="grid grid-3">
+                    <div class="service-card" onclick="window.location.href='marcacao.html?servico=primeira-via'">
+                        <div class="service-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>1ª Via do BI</h3>
+                        <p>Emissão do primeiro Bilhete de Identidade para cidadãos angolanos maiores de 18 anos.</p>
+                        <div class="service-price">3.500 Kz</div>
+                    </div>
+                    <div class="service-card" onclick="window.location.href='marcacao.html?servico=renovacao'">
+                        <div class="service-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Renovação de BI</h3>
+                        <p>Renovação do Bilhete de Identidade vencido ou próximo do vencimento.</p>
+                        <div class="service-price">2.500 Kz</div>
+                    </div>
+                    <div class="service-card" onclick="window.location.href='marcacao.html?servico=segunda-via'">
+                        <div class="service-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h3>2ª Via do BI</h3>
+                        <p>Emissão de segunda via em caso de perda, furto ou deterioração do documento.</p>
+                        <div class="service-price">5.000 Kz</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="section" style="background-color: var(--gray-100);">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Como Funciona</h2>
+                    <p>Em apenas 4 passos simples, realize a sua marcação</p>
+                </div>
+                <div class="grid grid-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mouse-pointer"></i>
+                        </div>
+                        <h3>Escolha o Serviço</h3>
+                        <p>Selecione o tipo de serviço que necessita (1ª via, renovação ou 2ª via).</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Selecione o Posto</h3>
+                        <p>Escolha o posto SIAC mais conveniente para si e a data disponível.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3>Preencha os Dados</h3>
+                        <p>Informe os seus dados pessoais e os documentos necessários.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3>Confirme</h3>
+                        <p>Receba o código de confirmação e apresente-se no dia marcado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Info Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Informações Importantes</h2>
+                    <p>Tudo o que precisa saber antes de fazer a sua marcação</p>
+                </div>
+                <div class="grid grid-2">
+                    <div class="info-card">
+                        <h4><i class="fas fa-file-alt"></i> Documentos Necessários</h4>
+                        <p>Certifique-se de ter todos os documentos em mãos antes de iniciar o processo de marcação. Os documentos variam conforme o tipo de serviço solicitado.</p>
+                        <a href="faq.html#documentos" class="btn btn-sm btn-secondary mt-2">
+                            <i class="fas fa-arrow-right"></i> Ver Documentos
+                        </a>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-clock"></i> Horário de Atendimento</h4>
+                        <p>Os postos SIAC funcionam de segunda a sexta-feira, das 08:00 às 15:00. Chegue com 15 minutos de antecedência do horário marcado.</p>
+                        <a href="faq.html#horarios" class="btn btn-sm btn-secondary mt-2">
+                            <i class="fas fa-arrow-right"></i> Ver Horários
+                        </a>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-credit-card"></i> Formas de Pagamento</h4>
+                        <p>O pagamento pode ser realizado via multicaixa, transferência bancária ou dinheiro no momento do atendimento.</p>
+                        <a href="faq.html#pagamento" class="btn btn-sm btn-secondary mt-2">
+                            <i class="fas fa-arrow-right"></i> Ver Pagamentos
+                        </a>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-bell"></i> Notificações</h4>
+                        <p>Receba lembretes por email e SMS sobre a sua marcação. Mantenha os seus dados de contacto actualizados.</p>
+                        <a href="faq.html#notificacoes" class="btn btn-sm btn-secondary mt-2">
+                            <i class="fas fa-arrow-right"></i> Saiba Mais
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section" style="background: linear-gradient(135deg, var(--angola-red) 0%, var(--angola-red-dark) 100%); color: white;">
+            <div class="container">
+                <div class="grid grid-4" style="text-align: center;">
+                    <div class="stat-item" style="animation: fadeInUp 0.6s ease-out;">
+                        <div style="font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">
+                            <i class="fas fa-building" style="font-size: 2.5rem; opacity: 0.8;"></i><br>15+
+                        </div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 1rem;">Postos SIAC</p>
+                    </div>
+                    <div class="stat-item" style="animation: fadeInUp 0.6s ease-out 0.1s both;">
+                        <div style="font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">
+                            <i class="fas fa-users" style="font-size: 2.5rem; opacity: 0.8;"></i><br>500K+
+                        </div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 1rem;">Atendimentos/Ano</p>
+                    </div>
+                    <div class="stat-item" style="animation: fadeInUp 0.6s ease-out 0.2s both;">
+                        <div style="font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">
+                            <i class="fas fa-map" style="font-size: 2.5rem; opacity: 0.8;"></i><br>18
+                        </div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 1rem;">Províncias</p>
+                    </div>
+                    <div class="stat-item" style="animation: fadeInUp 0.6s ease-out 0.3s both;">
+                        <div style="font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem;">
+                            <i class="fas fa-clock" style="font-size: 2.5rem; opacity: 0.8;"></i><br>24h
+                        </div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 1rem;">Agendamento Online</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section">
+            <div class="container" style="text-align: center;">
+                <h2>Pronto para começar?</h2>
+                <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.125rem;">Faça já a sua marcação e evite filas. O processo é rápido, simples e pode ser feito de qualquer lugar.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="registro.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus"></i> Criar Conta
+                    </a>
+                    <a href="login.html" class="btn btn-secondary btn-lg">
+                        <i class="fas fa-sign-in-alt"></i> Já tenho conta
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SIAC</h4>
+                    <p style="color: var(--gray-400); font-size: 0.875rem; line-height: 1.7;">Sistema Integrado de Atendimento ao Cidadão para emissão e gestão do Bilhete de Identidade em Angola.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Início</a></li>
+                        <li><a href="marcacao.html"><i class="fas fa-chevron-right"></i> Nova Marcação</a></li>
+                        <li><a href="minhas-marcacoes.html"><i class="fas fa-chevron-right"></i> Minhas Marcações</a></li>
+                        <li><a href="faq.html"><i class="fas fa-chevron-right"></i> Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contactos</h4>
+                    <ul>
+                        <li><a href="tel:111"><i class="fas fa-phone"></i> Linha de Apoio: 111</a></li>
+                        <li><a href="mailto:suporte@siac.gov.ao"><i class="fas fa-envelope"></i> suporte@piv.gov.ao</a></li>
+                        <li><span style="color: var(--gray-400);"><i class="fas fa-map-marker-alt"></i> Luanda, Angola</span></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Termos de Uso</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Política de Privacidade</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Acessibilidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 República de Angola - PIV/DNAICC. Todos os direitos reservados.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

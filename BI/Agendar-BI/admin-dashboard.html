@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Painel Administrativo - Sistema de Agendamento do Bilhete de Identidade.">
+    <title>Painel Administrativo - PIV Bilhete de Identidade | Angola</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇦🇴</text></svg>">
+</head>
+<body>
+    <!-- Admin Layout -->
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">🇦🇴</div>
+                    <div class="logo-text">
+                        <span class="logo-title">PIV</span>
+                        <span class="logo-subtitle">Admin</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="admin-sidebar-nav">
+                <a href="#dashboard" class="admin-nav-item active" onclick="showSection('dashboard')">
+                    <span>📊</span> Dashboard
+                </a>
+                <a href="#marcacoes" class="admin-nav-item" onclick="showSection('marcacoes')">
+                    <span>📋</span> Marcações
+                </a>
+                <a href="#postos" class="admin-nav-item" onclick="showSection('postos')">
+                    <span>🏢</span> Postos
+                </a>
+                <a href="#relatorios" class="admin-nav-item" onclick="showSection('relatorios')">
+                    <span>📈</span> Relatórios
+                </a>
+                <a href="#usuarios" class="admin-nav-item" onclick="showSection('usuarios')">
+                    <span>👥</span> Utilizadores
+                </a>
+                <a href="#configuracoes" class="admin-nav-item" onclick="showSection('configuracoes')">
+                    <span>⚙️</span> Configurações
+                </a>
+                <hr style="border: none; border-top: 1px solid var(--gray-700); margin: 1rem;">
+                <a href="index.html" class="admin-nav-item">
+                    <span>🏠</span> Site Público
+                </a>
+                <a href="#" class="admin-nav-item" onclick="SIAC.auth.logout()">
+                    <span>🚪</span> Sair
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="admin-header-left">
+                    <h2 style="margin: 0;">Dashboard</h2>
+                </div>
+                <div class="admin-header-right">
+                    <span style="color: var(--gray-500);">📅 <span id="dataAtual"></span></span>
+                    <div class="admin-user">
+                        <div class="admin-user-avatar">A</div>
+                        <div>
+                            <div style="font-weight: 600;">Administrador</div>
+                            <div style="font-size: 0.875rem; color: var(--gray-500);">SIAC</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <div id="section-dashboard" class="admin-section">
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon primary">
+                                📋
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="statTotalMarcacoes">0</h3>
+                                <p>Total de Marcações</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon success">
+                                ✅
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="statConcluidas">0</h3>
+                                <p>Concluídas</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon warning">
+                                ⏳
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="statPendentes">0</h3>
+                                <p>Pendentes</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon danger">
+                                🏢
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="statPostosAtivos">0</h3>
+                                <p>Postos Activos</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos e Tabelas -->
+                    <div class="grid grid-2" style="margin-top: 2rem;">
+                        <!-- Ocupação de Hoje -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 style="margin: 0;">📊 Ocupação de Hoje</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="ocupacaoHoje">
+                                    <!-- Dados serão carregados dinamicamente -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Marcações Recentes -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 style="margin: 0;">📋 Marcações Recentes</h3>
+                            </div>
+                            <div class="card-body" style="padding: 0;">
+                                <div class="table-container">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Serviço</th>
+                                                <th>Data</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tabelaRecentes">
+                                            <!-- Dados serão carregados dinamicamente -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Marcações Section -->
+                <div id="section-marcacoes" class="admin-section hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="margin: 0;">Gestão de Marcações</h3>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="buscaMarcacao" class="form-input" placeholder="Buscar por código..." style="width: 250px;" onkeyup="buscarMarcacoes()">
+                            <select id="filtroStatusAdmin" class="form-select" onchange="filtrarMarcacoesAdmin()">
+                                <option value="">Todos os Status</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="confirmada">Confirmada</option>
+                                <option value="concluida">Concluída</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nome</th>
+                                            <th>Serviço</th>
+                                            <th>Posto</th>
+                                            <th>Data</th>
+                                            <th>Horário</th>
+                                            <th>Status</th>
+                                            <th>Acções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelaMarcacoes">
+                                        <!-- Dados serão carregados dinamicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Postos Section -->
+                <div id="section-postos" class="admin-section hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="margin: 0;">Gestão de Postos</h3>
+                        <button type="button" class="btn btn-primary" onclick="abrirModalPosto()">
+                            <span>+</span> Novo Posto
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Endereço</th>
+                                            <th>Telefone</th>
+                                            <th>Status</th>
+                                            <th>Acções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelaPostos">
+                                        <!-- Dados serão carregados dinamicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Relatórios Section -->
+                <div id="section-relatorios" class="admin-section hidden">
+                    <h3 style="margin-bottom: 1.5rem;">Relatórios</h3>
+
+                    <div class="grid grid-2" style="margin-bottom: 2rem;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="margin: 0;">📊 Estatísticas Gerais</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="estatisticasGerais">
+                                    <!-- Dados serão carregados dinamicamente -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="margin: 0;">📈 Marcações por Período</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="marcacoesPorPeriodo">
+                                    <!-- Dados serão carregados dinamicamente -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 style="margin: 0;">🏢 Ocupação por Posto</h4>
+                        </div>
+                        <div class="card-body">
+                            <div id="ocupacaoPorPosto">
+                                <!-- Dados serão carregados dinamicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usuários Section -->
+                <div id="section-usuarios" class="admin-section hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="margin: 0;">Gestão de Utilizadores</h3>
+                        <input type="text" id="buscaUsuario" class="form-input" placeholder="Buscar por nome ou email..." style="width: 300px;" onkeyup="buscarUsuarios()">
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Email</th>
+                                            <th>Telefone</th>
+                                            <th>Província</th>
+                                            <th>Registo</th>
+                                            <th>Status</th>
+                                            <th>Acções</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabelaUsuarios">
+                                        <!-- Dados serão carregados dinamicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configurações Section -->
+                <div id="section-configuracoes" class="admin-section hidden">
+                    <h3 style="margin-bottom: 1.5rem;">Configurações do Sistema</h3>
+
+                    <div class="grid grid-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="margin: 0;">⚙️ Configurações Gerais</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="configForm">
+                                    <div class="form-group">
+                                        <label class="form-label">Nome do Sistema</label>
+                                        <input type="text" class="form-input" value="SIAC - Bilhete de Identidade" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Versão</label>
+                                        <input type="text" class="form-input" value="1.0.0" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Email de Suporte</label>
+                                        <input type="email" class="form-input" value="suporte@siac.gov.ao">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Telefone de Suporte</label>
+                                        <input type="tel" class="form-input" value="111">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" onclick="SIAC.notifications.success('Configurações salvas com sucesso!')">
+                                        Salvar Alterações
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 style="margin: 0;">🔔 Notificações</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="notifForm">
+                                    <div class="form-group">
+                                        <label class="form-check">
+                                            <input type="checkbox" class="form-check-input" checked>
+                                            <span class="form-check-label">Enviar lembretes por email</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-check">
+                                            <input type="checkbox" class="form-check-input" checked>
+                                            <span class="form-check-label">Enviar lembretes por SMS</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Antecedência do lembrete (horas)</label>
+                                        <input type="number" class="form-input" value="24" min="1" max="72">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" onclick="SIAC.notifications.success('Configurações de notificações salvas!')">
+                                        Salvar Configurações
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Posto -->
+    <div class="modal-overlay" id="modalPosto">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="tituloModalPosto">Novo Posto</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="postoForm">
+                    <input type="hidden" id="postoIdEdit">
+                    <div class="form-group">
+                        <label class="form-label required">Nome do Posto</label>
+                        <input type="text" id="postoNome" class="form-input" placeholder="Ex: SIAC Luanda - Cazenga" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Endereço</label>
+                        <textarea id="postoEndereco" class="form-textarea" placeholder="Endereço completo" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Telefone</label>
+                        <input type="tel" id="postoTelefone" class="form-input" placeholder="+244 900 000 000" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="SIAC.modals.close('modalPosto')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="salvarPosto()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Vagas -->
+    <div class="modal-overlay" id="modalVagas">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Gerenciar Vagas</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="vagasPostoId">
+                <div class="form-group">
+                    <label class="form-label">Data</label>
+                    <input type="date" id="vagasData" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Número de Vagas</label>
+                    <input type="number" id="vagasQuantidade" class="form-input" min="0" max="100">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="SIAC.modals.close('modalVagas')">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="salvarVagas()">Salvar Vagas</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Verificar se é admin
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = SIAC.session.getUser();
+            if (!user || user.role !== 'admin') {
+                // Criar usuário admin padrão se não existir
+                const users = SIAC.storage.get('users') || [];
+                if (!users.find(u => u.role === 'admin')) {
+                    users.push({
+                        id: 1,
+                        nome: 'Administrador',
+                        email: 'admin@siac.gov.ao',
+                        password: 'admin123',
+                        role: 'admin',
+                        ativo: true
+                    });
+                    SIAC.storage.set('users', users);
+                }
+                
+                // Se não estiver logado como admin, redirecionar
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+            }
+
+            // Atualizar data
+            document.getElementById('dataAtual').textContent = new Date().toLocaleDateString('pt-AO');
+
+            // Carregar dados
+            carregarDashboard();
+            carregarMarcacoes();
+            carregarPostos();
+            carregarRelatorios();
+            carregarUsuarios();
+        });
+
+        function showSection(section) {
+            // Esconder todas as secções
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.add('hidden'));
+            
+            // Mostrar secção seleccionada
+            document.getElementById(`section-${section}`).classList.remove('hidden');
+            
+            // Atualizar menu
+            document.querySelectorAll('.admin-nav-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.admin-nav-item').classList.add('active');
+            
+            // Atualizar título
+            document.querySelector('.admin-header h2').textContent = 
+                section.charAt(0).toUpperCase() + section.slice(1);
+        }
+
+        function carregarDashboard() {
+            const stats = SIAC.relatorios.getEstatisticas();
+            
+            document.getElementById('statTotalMarcacoes').textContent = stats.totalMarcacoes;
+            document.getElementById('statConcluidas').textContent = stats.concluidas;
+            document.getElementById('statPendentes').textContent = stats.pendentes;
+            document.getElementById('statPostosAtivos').textContent = stats.postosAtivos;
+
+            // Ocupação de hoje
+            const ocupacao = SIAC.relatorios.getOcupacaoPorPosto();
+            const ocupacaoHtml = ocupacao.map(o => `
+                <div style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                        <span style="font-size: 0.875rem;">${o.posto}</span>
+                        <span style="font-size: 0.875rem; font-weight: 600;">${o.ocupadas}/${o.vagasTotais}</span>
+                    </div>
+                    <div style="background: var(--gray-200); height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div style="background: ${o.taxaOcupacao > 80 ? 'var(--error)' : o.taxaOcupacao > 50 ? 'var(--warning)' : 'var(--success)'}; height: 100%; width: ${o.taxaOcupacao}%; transition: width 0.3s;"></div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('ocupacaoHoje').innerHTML = ocupacaoHtml || '<p style="color: var(--gray-500);">Sem dados disponíveis</p>';
+
+            // Marcações recentes
+            const recentes = SIAC.marcacoes.getAll().slice(0, 5);
+            const recentesHtml = recentes.map(m => {
+                const statusClass = {
+                    'pendente': 'badge-warning',
+                    'confirmada': 'badge-info',
+                    'concluida': 'badge-success',
+                    'cancelada': 'badge-error'
+                }[m.status] || 'badge-warning';
+                
+                return `
+                    <tr>
+                        <td><code>${m.codigo}</code></td>
+                        <td>${m.servico === 'primeira-via' ? '1ª Via' : m.servico === 'renovacao' ? 'Renovação' : '2ª Via'}</td>
+                        <td>${SIAC.utils.formatDate(m.data)}</td>
+                        <td><span class="badge ${statusClass}">${m.status}</span></td>
+                    </tr>
+                `;
+            }).join('');
+            document.getElementById('tabelaRecentes').innerHTML = recentesHtml || '<tr><td colspan="4" style="text-align: center;">Nenhuma marcação</td></tr>';
+        }
+
+        function carregarMarcacoes() {
+            const marcacoes = SIAC.marcacoes.getAll();
+            const postos = SIAC.storage.getPostos();
+            
+            const html = marcacoes.map(m => {
+                const posto = postos.find(p => p.id === parseInt(m.postoId));
+                const statusClass = {
+                    'pendente': 'badge-warning',
+                    'confirmada': 'badge-info',
+                    'concluida': 'badge-success',
+                    'cancelada': 'badge-error'
+                }[m.status] || 'badge-warning';
+                
+                return `
+                    <tr>
+                        <td><code>${m.codigo}</code></td>
+                        <td>${m.nome}</td>
+                        <td>${m.servico === 'primeira-via' ? '1ª Via' : m.servico === 'renovacao' ? 'Renovação' : '2ª Via'}</td>
+                        <td>${posto?.nome || 'N/A'}</td>
+                        <td>${SIAC.utils.formatDate(m.data)}</td>
+                        <td>${m.horario}</td>
+                        <td><span class="badge ${statusClass}">${m.status}</span></td>
+                        <td>
+                            <select class="form-select" style="width: auto; padding: 0.25rem 0.5rem; font-size: 0.875rem;" onchange="alterarStatus(${m.id}, this.value)">
+                                <option value="">Alterar...</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="confirmada">Confirmada</option>
+                                <option value="concluida">Concluída</option>
+                                <option value="cancelada">Cancelada</option>
+                            </select>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            
+            document.getElementById('tabelaMarcacoes').innerHTML = html || '<tr><td colspan="8" style="text-align: center;">Nenhuma marcação encontrada</td></tr>';
+        }
+
+        function carregarPostos() {
+            const postos = SIAC.storage.getPostos();
+            
+            const html = postos.map(p => `
+                <tr>
+                    <td><strong>${p.nome}</strong></td>
+                    <td>${p.endereco}</td>
+                    <td>${p.telefone}</td>
+                    <td><span class="badge ${p.ativo ? 'badge-success' : 'badge-error'}">${p.ativo ? 'Activo' : 'Inactivo'}</span></td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline" onclick="editarPosto(${p.id})">✏️</button>
+                        <button type="button" class="btn btn-sm btn-outline" onclick="gerenciarVagas(${p.id})">📅</button>
+                        <button type="button" class="btn btn-sm ${p.ativo ? 'btn-danger' : 'btn-success'}" onclick="togglePosto(${p.id})">${p.ativo ? '🚫' : '✓'}</button>
+                    </td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('tabelaPostos').innerHTML = html;
+        }
+
+        function carregarRelatorios() {
+            const stats = SIAC.relatorios.getEstatisticas();
+            
+            document.getElementById('estatisticasGerais').innerHTML = `
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--gray-50); border-radius: var(--border-radius);">
+                        <span>Total de Marcações:</span>
+                        <strong>${stats.totalMarcacoes}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--gray-50); border-radius: var(--border-radius);">
+                        <span>Marcações Hoje:</span>
+                        <strong>${stats.marcacoesHoje}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--gray-50); border-radius: var(--border-radius);">
+                        <span>Total de Utilizadores:</span>
+                        <strong>${stats.totalUsuarios}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--gray-50); border-radius: var(--border-radius);">
+                        <span>Total de Postos:</span>
+                        <strong>${stats.totalPostos}</strong>
+                    </div>
+                </div>
+            `;
+
+            // Ocupação por posto
+            const ocupacao = SIAC.relatorios.getOcupacaoPorPosto();
+            document.getElementById('ocupacaoPorPosto').innerHTML = `
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Posto</th>
+                                <th>Vagas Totais</th>
+                                <th>Ocupadas</th>
+                                <th>Disponíveis</th>
+                                <th>Taxa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${ocupacao.map(o => `
+                                <tr>
+                                    <td>${o.posto}</td>
+                                    <td>${o.vagasTotais}</td>
+                                    <td>${o.ocupadas}</td>
+                                    <td>${o.disponiveis}</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <div style="background: var(--gray-200); height: 8px; width: 60px; border-radius: 4px; overflow: hidden;">
+                                                <div style="background: ${o.taxaOcupacao > 80 ? 'var(--error)' : o.taxaOcupacao > 50 ? 'var(--warning)' : 'var(--success)'}; height: 100%; width: ${o.taxaOcupacao}%;"></div>
+                                            </div>
+                                            <span style="font-size: 0.875rem;">${o.taxaOcupacao}%</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function carregarUsuarios() {
+            const users = SIAC.storage.get('users') || [];
+            
+            const html = users.map(u => `
+                <tr>
+                    <td>${u.nome}</td>
+                    <td>${u.email}</td>
+                    <td>${u.telefone || 'N/A'}</td>
+                    <td>${u.provincia || 'N/A'}</td>
+                    <td>${SIAC.utils.formatDate(u.createdAt)}</td>
+                    <td><span class="badge ${u.ativo ? 'badge-success' : 'badge-error'}">${u.ativo ? 'Activo' : 'Inactivo'}</span></td>
+                    <td>
+                        <button type="button" class="btn btn-sm ${u.ativo ? 'btn-danger' : 'btn-success'}" onclick="toggleUsuario(${u.id})">${u.ativo ? '🚫' : '✓'}</button>
+                    </td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('tabelaUsuarios').innerHTML = html || '<tr><td colspan="7" style="text-align: center;">Nenhum utilizador encontrado</td></tr>';
+        }
+
+        function alterarStatus(id, status) {
+            if (!status) return;
+            
+            const result = SIAC.marcacoes.updateStatus(id, status);
+            if (result.success) {
+                SIAC.notifications.success(result.message);
+                carregarMarcacoes();
+                carregarDashboard();
+            } else {
+                SIAC.notifications.error(result.message);
+            }
+        }
+
+        function abrirModalPosto() {
+            document.getElementById('postoIdEdit').value = '';
+            document.getElementById('postoNome').value = '';
+            document.getElementById('postoEndereco').value = '';
+            document.getElementById('postoTelefone').value = '';
+            document.getElementById('tituloModalPosto').textContent = 'Novo Posto';
+            SIAC.modals.open('modalPosto');
+        }
+
+        function editarPosto(id) {
+            const postos = SIAC.storage.getPostos();
+            const posto = postos.find(p => p.id === id);
+            if (!posto) return;
+            
+            document.getElementById('postoIdEdit').value = id;
+            document.getElementById('postoNome').value = posto.nome;
+            document.getElementById('postoEndereco').value = posto.endereco;
+            document.getElementById('postoTelefone').value = posto.telefone;
+            document.getElementById('tituloModalPosto').textContent = 'Editar Posto';
+            SIAC.modals.open('modalPosto');
+        }
+
+        function salvarPosto() {
+            const id = document.getElementById('postoIdEdit').value;
+            const nome = document.getElementById('postoNome').value.trim();
+            const endereco = document.getElementById('postoEndereco').value.trim();
+            const telefone = document.getElementById('postoTelefone').value.trim();
+            
+            if (!nome || !endereco || !telefone) {
+                SIAC.notifications.error('Por favor, preencha todos os campos');
+                return;
+            }
+            
+            const data = { nome, endereco, telefone };
+            
+            let result;
+            if (id) {
+                result = SIAC.postosManager.update(id, data);
+            } else {
+                result = SIAC.postosManager.create(data);
+            }
+            
+            if (result.success) {
+                SIAC.notifications.success(result.message);
+                SIAC.modals.close('modalPosto');
+                carregarPostos();
+                carregarDashboard();
+            } else {
+                SIAC.notifications.error(result.message);
+            }
+        }
+
+        function togglePosto(id) {
+            const result = SIAC.postosManager.toggleStatus(id);
+            if (result.success) {
+                SIAC.notifications.success(result.message);
+                carregarPostos();
+                carregarDashboard();
+            } else {
+                SIAC.notifications.error(result.message);
+            }
+        }
+
+        function gerenciarVagas(id) {
+            document.getElementById('vagasPostoId').value = id;
+            document.getElementById('vagasData').value = '';
+            document.getElementById('vagasQuantidade').value = '';
+            SIAC.modals.open('modalVagas');
+        }
+
+        function salvarVagas() {
+            const postoId = document.getElementById('vagasPostoId').value;
+            const data = document.getElementById('vagasData').value;
+            const vagas = document.getElementById('vagasQuantidade').value;
+            
+            if (!data || vagas === '') {
+                SIAC.notifications.error('Por favor, preencha a data e quantidade de vagas');
+                return;
+            }
+            
+            const result = SIAC.postosManager.updateVagas(postoId, data, vagas);
+            if (result.success) {
+                SIAC.notifications.success(result.message);
+                SIAC.modals.close('modalVagas');
+                carregarDashboard();
+            } else {
+                SIAC.notifications.error(result.message);
+            }
+        }
+
+        function toggleUsuario(id) {
+            const users = SIAC.storage.get('users') || [];
+            const index = users.findIndex(u => u.id === id);
+            if (index === -1) return;
+            
+            users[index].ativo = !users[index].ativo;
+            SIAC.storage.set('users', users);
+            
+            SIAC.notifications.success(`Utilizador ${users[index].ativo ? 'activado' : 'desactivado'} com sucesso!`);
+            carregarUsuarios();
+        }
+
+        function buscarMarcacoes() {
+            const termo = document.getElementById('buscaMarcacao').value.toLowerCase();
+            const rows = document.querySelectorAll('#tabelaMarcacoes tr');
+            
+            rows.forEach(row => {
+                const codigo = row.cells[0]?.textContent.toLowerCase() || '';
+                const nome = row.cells[1]?.textContent.toLowerCase() || '';
+                
+                if (codigo.includes(termo) || nome.includes(termo)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function filtrarMarcacoesAdmin() {
+            const status = document.getElementById('filtroStatusAdmin').value;
+            const rows = document.querySelectorAll('#tabelaMarcacoes tr');
+            
+            rows.forEach(row => {
+                const rowStatus = row.cells[6]?.textContent.toLowerCase() || '';
+                
+                if (!status || rowStatus === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function buscarUsuarios() {
+            const termo = document.getElementById('buscaUsuario').value.toLowerCase();
+            const rows = document.querySelectorAll('#tabelaUsuarios tr');
+            
+            rows.forEach(row => {
+                const nome = row.cells[0]?.textContent.toLowerCase() || '';
+                const email = row.cells[1]?.textContent.toLowerCase() || '';
+                
+                if (nome.includes(termo) || email.includes(termo)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

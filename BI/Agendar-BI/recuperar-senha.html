@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Recuperar Senha - Sistema de Agendamento do Bilhete de Identidade.">
+    <title>Recuperar Senha - SIAC Bilhete de Identidade | Angola</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇦🇴</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container header-top-content">
+                <div class="header-top-left">
+                    <span class="header-top-item">
+                        <span>📞</span> Linha de Apoio: 111
+                    </span>
+                    <span class="header-top-item">
+                        <span>✉️</span> suporte@siac.gov.ao
+                    </span>
+                </div>
+                <div class="header-top-right">
+                    <span class="header-top-item">
+                        <span>🌐</span> República de Angola
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">🇦🇴</div>
+                    <div class="logo-text">
+                        <span class="logo-title">SIAC</span>
+                        <span class="logo-subtitle">Bilhete de Identidade</span>
+                    </div>
+                </a>
+                <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                    ☰
+                </button>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Início</a>
+                    <a href="marcacao.html" class="nav-link">Nova Marcação</a>
+                    <a href="minhas-marcacoes.html" class="nav-link">Minhas Marcações</a>
+                    <a href="faq.html" class="nav-link">Ajuda</a>
+                    <a href="login.html" class="nav-link">Entrar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container" style="max-width: 500px; padding: 3rem 1.5rem;">
+            <div class="card">
+                <div class="card-header" style="text-align: center;">
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--angola-red) 0%, var(--angola-red-dark) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2.5rem;">
+                        🔑
+                    </div>
+                    <h3 style="margin: 0;">Recuperar Senha</h3>
+                    <p style="color: var(--gray-500); margin: 0.5rem 0 0;">Informe o seu email para receber as instruções</p>
+                </div>
+                <div class="card-body">
+                    <!-- Formulário de recuperação -->
+                    <div id="formRecuperacao">
+                        <form id="recuperarForm" data-validate>
+                            <div class="form-group">
+                                <label class="form-label required" for="email">Email</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input" 
+                                    placeholder="seu.email@exemplo.com"
+                                    data-validate='{"required": true, "email": true}'
+                                    required
+                                >
+                                <span class="form-error" style="display: none;"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnRecuperar">
+                                <span>📧</span> Enviar Instruções
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Mensagem de sucesso (inicialmente escondida) -->
+                    <div id="mensagemSucesso" class="hidden" style="text-align: center;">
+                        <div style="width: 80px; height: 80px; background: var(--success-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 2.5rem;">
+                            ✓
+                        </div>
+                        <h4 style="color: var(--success);">Email Enviado!</h4>
+                        <p style="color: var(--gray-600);">Verifique a sua caixa de entrada e siga as instruções para redefinir a sua senha.</p>
+                        <p style="color: var(--gray-500); font-size: 0.875rem; margin-top: 1rem;">Não recebeu? Verifique a pasta de spam ou <a href="#" onclick="mostrarFormulario()">tente novamente</a>.</p>
+                    </div>
+
+                    <hr style="border: none; border-top: 1px solid var(--gray-200); margin: 1.5rem 0;">
+
+                    <div style="text-align: center;">
+                        <a href="login.html" style="color: var(--angola-red); font-size: 0.9375rem;">
+                            ← Voltar ao Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dicas de segurança -->
+            <div class="alert alert-info" style="margin-top: 1.5rem;">
+                <span class="alert-icon">💡</span>
+                <div class="alert-content">
+                    <div class="alert-title">Dica de Segurança</div>
+                    <p style="margin: 0; font-size: 0.875rem;">Crie uma senha forte com pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SIAC</h4>
+                    <p style="color: var(--gray-400); font-size: 0.875rem;">Sistema Integrado de Atendimento ao Cidadão para emissão e gestão do Bilhete de Identidade em Angola.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="marcacao.html">Nova Marcação</a></li>
+                        <li><a href="minhas-marcacoes.html">Minhas Marcações</a></li>
+                        <li><a href="faq.html">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contactos</h4>
+                    <ul>
+                        <li><a href="tel:111">Linha de Apoio: 111</a></li>
+                        <li><a href="mailto:suporte@siac.gov.ao">suporte@siac.gov.ao</a></li>
+                        <li><span style="color: var(--gray-400);">Luanda, Angola</span></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Acessibilidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 República de Angola - SIAC/DNAICC. Todos os direitos reservados.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function mostrarFormulario() {
+            document.getElementById('formRecuperacao').classList.remove('hidden');
+            document.getElementById('mensagemSucesso').classList.add('hidden');
+            document.getElementById('email').value = '';
+        }
+
+        document.getElementById('recuperarForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btnRecuperar = document.getElementById('btnRecuperar');
+            const email = document.getElementById('email').value.trim();
+            
+            // Validar formulário
+            if (!SIAC.formValidation.validateForm(this)) {
+                return;
+            }
+
+            // Mostrar loading
+            btnRecuperar.disabled = true;
+            btnRecuperar.innerHTML = '<span class="spinner" style="width: 20px; height: 20px; border-width: 2px;"></span> A enviar...';
+
+            // Simular envio
+            setTimeout(() => {
+                const result = SIAC.auth.recoverPassword(email);
+                
+                if (result.success) {
+                    document.getElementById('formRecuperacao').classList.add('hidden');
+                    document.getElementById('mensagemSucesso').classList.remove('hidden');
+                    SIAC.notifications.success(result.message);
+                } else {
+                    SIAC.notifications.error(result.message);
+                    btnRecuperar.disabled = false;
+                    btnRecuperar.innerHTML = '<span>📧</span> Enviar Instruções';
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
+
+
